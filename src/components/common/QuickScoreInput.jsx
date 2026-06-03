@@ -1,0 +1,87 @@
+import { useId } from 'react';
+
+const toneClass = {
+  blue: {
+    ring: 'focus:ring-blue-500',
+    active: 'text-blue-800',
+  },
+  hcmut: {
+    ring: 'focus:ring-blue-800',
+    active: 'text-blue-800',
+  },
+  emerald: {
+    ring: 'focus:ring-emerald-600',
+    active: 'text-emerald-800',
+  },
+  indigo: {
+    ring: 'focus:ring-indigo-600',
+    active: 'text-indigo-800',
+  },
+  red: {
+    ring: 'focus:ring-red-500',
+    active: 'text-red-800',
+  },
+};
+
+export const QuickScoreInput = ({
+  title,
+  description = 'Tổng điểm 3 môn trên thang 30.',
+  value,
+  onChange,
+  disabled,
+  max = 30,
+  step = '0.01',
+  placeholder = '0.00',
+  tone = 'blue',
+  className = '',
+}) => {
+  const inputId = useId();
+  const descriptionId = `${inputId}-description`;
+  const toneStyle = toneClass[tone] || toneClass.blue;
+  const handleChange = (event) => {
+    const { value } = event.target;
+    if (value !== '') {
+      if (value.toString().trim().startsWith('-')) {
+        event.target.value = '0';
+        onChange(event);
+        return;
+      }
+      const number = parseFloat(value);
+      const maxValue = parseFloat(max);
+      if (!Number.isNaN(number)) {
+        event.target.value = Math.min(Math.max(number, 0), maxValue).toString();
+      }
+    }
+    onChange(event);
+  };
+
+  return (
+    <div className={`rounded-xl border border-slate-200 bg-slate-50 p-4 ${className}`}>
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <label htmlFor={inputId} className="mb-1 block text-sm font-semibold text-slate-700">
+            {title}
+          </label>
+          <p id={descriptionId} className="text-xs text-slate-500">{description}</p>
+        </div>
+        <input
+          id={inputId}
+          type="number"
+          min="0"
+          max={max}
+          step={step}
+          value={value}
+          onChange={handleChange}
+          disabled={disabled}
+          aria-describedby={description ? descriptionId : undefined}
+          className={`w-full rounded-md border px-3 py-2 text-right text-lg font-bold focus:outline-none focus:ring-2 sm:w-40 ${toneStyle.ring} ${
+            disabled
+              ? 'cursor-not-allowed border-slate-200 bg-slate-100 text-slate-500'
+              : `border-slate-200 bg-white ${toneStyle.active}`
+          }`}
+          placeholder={placeholder}
+        />
+      </div>
+    </div>
+  );
+};
