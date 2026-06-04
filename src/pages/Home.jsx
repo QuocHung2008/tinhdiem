@@ -72,7 +72,7 @@ export const Home = () => {
         {SCHOOLS.map((school) => {
           const Icon = school.icon;
           const isUit = school.id === 'uit';
-          const cardClass = "group relative flex min-h-[17rem] flex-col justify-between rounded-[1.75rem] border border-white/80 bg-white/92 p-6 shadow-[0_24px_60px_-36px_rgba(15,23,42,0.28)] transition-all duration-200 ease-out hover:-translate-y-1 hover:border-slate-300 hover:shadow-[0_28px_70px_-32px_rgba(37,99,235,0.24)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500";
+          const cardClass = "group relative flex min-h-[17rem] flex-col justify-between rounded-[1.75rem] border border-white/80 bg-white/90 p-6 shadow-[0_24px_60px_-36px_rgba(15,23,42,0.28)] transition-all duration-200 ease-out hover:-translate-y-1 hover:border-slate-300 hover:shadow-[0_28px_70px_-32px_rgba(37,99,235,0.24)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500";
           const content = (
             <>
               <div className="flex items-start justify-between gap-4">

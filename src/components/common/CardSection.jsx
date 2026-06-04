@@ -6,7 +6,7 @@ export const CardSection = ({ title, icon: Icon, children }) => {
   return (
     <section
       aria-labelledby={titleId}
-      className="overflow-hidden rounded-[1.75rem] border border-white/80 bg-white/92 shadow-[0_24px_80px_-36px_rgba(15,23,42,0.28)] backdrop-blur"
+      className="overflow-hidden rounded-[1.75rem] border border-white/80 bg-white/90 shadow-[0_24px_80px_-36px_rgba(15,23,42,0.28)] backdrop-blur"
     >
       <div className="flex items-center gap-3 border-b border-slate-100 bg-slate-50/80 px-5 py-4 sm:px-6">
         {Icon && (
