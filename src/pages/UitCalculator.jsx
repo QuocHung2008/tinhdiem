@@ -173,7 +173,9 @@ export const UitCalculator = () => {
             <CardSection title="1. Điểm Học bạ" icon={BookOpen}>
               <div className="space-y-4">
                 <h4 className="mb-3 font-semibold text-slate-800">Học bạ 3 môn (Điểm trung bình năm học)</h4>
-                <div className="overflow-x-auto">
+                
+                {/* Desktop View: Table */}
+                <div className="hidden md:block overflow-x-auto">
                   <table className="w-full text-sm">
                     <thead className="bg-slate-50 text-slate-600">
                       <tr>
@@ -185,7 +187,7 @@ export const UitCalculator = () => {
                     </thead>
                     <tbody className="divide-y divide-slate-100">
                       {subjects.map((subject, subjectIndex) => (
-                        <tr key={`hocba-${subject}`}>
+                        <tr key={`hocba-desktop-${subject}`}>
                           <td className="px-3 py-2 font-medium text-slate-700">{subject}</td>
                           {[0, 1, 2].map((yearIndex) => {
                             const cellIndex = subjectIndex * 3 + yearIndex;
@@ -211,6 +213,42 @@ export const UitCalculator = () => {
                       ))}
                     </tbody>
                   </table>
+                </div>
+
+                {/* Mobile View: Stacked Cards */}
+                <div className="block md:hidden space-y-4">
+                  {subjects.map((subject, subjectIndex) => (
+                    <div key={`hocba-mobile-${subject}`} className="rounded-xl border border-slate-100 bg-slate-50/50 p-3.5 space-y-2">
+                      <div className="font-bold text-slate-800 text-xs uppercase tracking-wider">{subject}</div>
+                      <div className="grid grid-cols-3 gap-2">
+                        {[
+                          { label: 'Lớp 10', idx: 0 },
+                          { label: 'Lớp 11', idx: 1 },
+                          { label: 'Lớp 12', idx: 2 }
+                        ].map((year) => {
+                          const cellIndex = subjectIndex * 3 + year.idx;
+                          return (
+                            <div key={year.label} className="space-y-1">
+                              <span className="text-[10px] font-medium text-slate-500 block text-center">{year.label}</span>
+                              <input
+                                type="number"
+                                min="0"
+                                max="10"
+                                step="0.1"
+                                value={state.hocBa[cellIndex]}
+                                onChange={(event) => handleHocBaChange(cellIndex, event.target.value)}
+                                disabled={hasHocBaQuickTotal}
+                                className={`w-full rounded-lg border border-slate-200 py-1.5 text-center text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white ${
+                                  hasHocBaQuickTotal ? 'cursor-not-allowed bg-slate-100 text-slate-400' : 'text-slate-950 font-semibold'
+                                }`}
+                                placeholder="0.0"
+                              />
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  ))}
                 </div>
 
                 <QuickScoreInput
@@ -245,10 +283,10 @@ export const UitCalculator = () => {
 
                 <div>
                   <h4 className="mb-3 font-semibold text-slate-800">Điểm thi tốt nghiệp THPT 3 môn</h4>
-                  <div className="space-y-3">
+                  <div className="grid grid-cols-3 gap-2 sm:gap-4">
                     {subjects.map((subject, index) => (
-                      <div key={`thpt-${subject}`} className="flex items-center gap-3">
-                        <label className="w-16 text-sm text-slate-600">{subject}</label>
+                      <div key={`thpt-${subject}`} className="space-y-1">
+                        <label className="text-[11px] font-semibold text-slate-500 block text-center">{subject}</label>
                         <input
                           type="number"
                           min="0"
@@ -257,8 +295,8 @@ export const UitCalculator = () => {
                           value={state.thpt[index]}
                           onChange={(event) => handleThptChange(index, event.target.value)}
                           disabled={hasThptQuickTotal}
-                          className={`w-full rounded-md border border-slate-200 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                            hasThptQuickTotal ? 'cursor-not-allowed bg-slate-100 text-slate-400' : ''
+                          className={`w-full rounded-lg border border-slate-200 py-2 text-center text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white ${
+                            hasThptQuickTotal ? 'cursor-not-allowed bg-slate-100 text-slate-400' : 'text-slate-950 font-semibold'
                           }`}
                           placeholder="0.0"
                         />
@@ -427,7 +465,33 @@ export const UitCalculator = () => {
 
             {/* Ưu tiên khu vực & đối tượng */}
             <CardSection title="4. Ưu tiên khu vực & đối tượng" icon={Info}>
-              <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+              <div className="grid grid-cols-2 gap-3 md:gap-6">
+                <div>
+                  <label className="mb-2 block text-sm font-medium text-slate-700">Khu vực</label>
+                  <select
+                    value={state.kv}
+                    onChange={(event) => state.setKv(event.target.value)}
+                    className="w-full rounded-md border border-slate-200 bg-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
+                  >
+                    {KHU_VUC.map((item) => (
+                      <option key={item.id} value={item.id}>{item.name}</option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label className="mb-2 block text-sm font-medium text-slate-700">Đối tượng</label>
+                  <select
+                    value={state.dt}
+                    onChange={(event) => state.setDt(event.target.value)}
+                    className="w-full rounded-md border border-slate-200 bg-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
+                  >
+                    {DOI_TUONG.map((item) => (
+                      <option key={item.id} value={item.id}>{item.name}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+            </CardSection>
                 <div>
                   <label className="mb-2 block text-sm font-medium text-slate-700">Khu vực</label>
                   <select
