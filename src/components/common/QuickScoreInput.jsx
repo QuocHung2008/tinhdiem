@@ -4,27 +4,27 @@ const toneClass = {
   blue: {
     ring: 'focus:ring-blue-500',
     active: 'text-blue-800',
-    panel: 'border-blue-100 bg-gradient-to-br from-blue-50 to-white',
+    panel: 'border-[color:var(--line-soft)] bg-[linear-gradient(135deg,var(--panel-muted),var(--panel-elevated))]',
   },
   hcmut: {
     ring: 'focus:ring-blue-800',
     active: 'text-blue-800',
-    panel: 'border-blue-100 bg-gradient-to-br from-blue-50 to-white',
+    panel: 'border-[color:var(--line-soft)] bg-[linear-gradient(135deg,var(--panel-muted),var(--panel-elevated))]',
   },
   emerald: {
     ring: 'focus:ring-emerald-600',
     active: 'text-emerald-800',
-    panel: 'border-emerald-100 bg-gradient-to-br from-emerald-50 to-white',
+    panel: 'border-[color:var(--line-soft)] bg-[linear-gradient(135deg,var(--panel-muted),var(--panel-elevated))]',
   },
   indigo: {
     ring: 'focus:ring-indigo-600',
     active: 'text-indigo-800',
-    panel: 'border-indigo-100 bg-gradient-to-br from-indigo-50 to-white',
+    panel: 'border-[color:var(--line-soft)] bg-[linear-gradient(135deg,var(--panel-muted),var(--panel-elevated))]',
   },
   red: {
     ring: 'focus:ring-red-500',
     active: 'text-red-800',
-    panel: 'border-rose-100 bg-gradient-to-br from-rose-50 to-white',
+    panel: 'border-[color:var(--line-soft)] bg-[linear-gradient(135deg,var(--panel-muted),var(--panel-elevated))]',
   },
 };
 
@@ -64,10 +64,10 @@ export const QuickScoreInput = ({
     <div className={`rounded-[1.5rem] border p-4 shadow-sm ${toneStyle.panel} ${className}`}>
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <label htmlFor={inputId} className="mb-1 block text-sm font-bold text-slate-800">
+          <label htmlFor={inputId} className="mb-1 block text-sm font-bold text-[color:var(--text-strong)]">
             {title}
           </label>
-          <p id={descriptionId} className="text-xs leading-6 text-slate-500">{description}</p>
+          <p id={descriptionId} className="text-xs leading-6 text-[color:var(--text-muted)]">{description}</p>
         </div>
         <input
           id={inputId}
@@ -81,8 +81,8 @@ export const QuickScoreInput = ({
           aria-describedby={description ? descriptionId : undefined}
           className={`w-full rounded-2xl border px-4 py-3 text-right text-xl font-black tracking-tight shadow-sm focus:outline-none focus:ring-2 sm:w-44 ${toneStyle.ring} ${
             disabled
-              ? 'cursor-not-allowed border-slate-200 bg-slate-100 text-slate-500'
-              : `border-white bg-white ${toneStyle.active}`
+              ? 'cursor-not-allowed border-[color:var(--line-soft)] bg-[color:var(--panel-muted)] text-[color:var(--text-faint)]'
+              : `border-[color:var(--line-soft)] bg-[color:var(--panel-base)] ${toneStyle.active}`
           }`}
           placeholder={placeholder}
         />

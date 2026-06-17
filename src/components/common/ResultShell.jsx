@@ -44,7 +44,7 @@ export const ResultShell = ({
     >
       <div
         className={`
-          relative flex w-full flex-col overflow-hidden bg-white shadow-[0_30px_80px_-30px_rgba(15,23,42,0.6)]
+          relative flex w-full flex-col overflow-hidden bg-[color:var(--panel-base)] shadow-[0_30px_80px_-30px_rgba(15,23,42,0.6)]
           ${showMobile ? 'max-h-[92vh] rounded-t-[2rem] sm:max-w-md sm:rounded-[2rem] animate-in slide-in-from-bottom-full sm:zoom-in-95' : `sticky top-24 rounded-[2rem] border ${styles.border}`}
         `}
       >
@@ -75,7 +75,7 @@ export const ResultShell = ({
           </div>
         </div>
 
-        <div className="space-y-6 bg-white p-6">{children}</div>
+        <div className="space-y-6 bg-[color:var(--panel-base)] p-6 text-[color:var(--text-body)]">{children}</div>
       </div>
     </div>
   );

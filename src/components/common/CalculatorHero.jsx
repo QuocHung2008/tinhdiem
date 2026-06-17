@@ -3,11 +3,11 @@ import { Calculator, ChevronLeft, ExternalLink } from 'lucide-react';
 
 const toneClass = {
   blue: {
-    badge: 'border-[#0d3b66]/10 bg-[#0d3b66]/5 text-[#0d3b66]',
-    icon: 'bg-[#0d3b66]/10 text-[#0d3b66] ring-1 ring-[#0d3b66]/10',
-    panel: 'from-[#0d3b66]/12 via-white to-[#f7b500]/10',
-    button: 'border-[#0d3b66] bg-[#0d3b66] text-white hover:bg-[#0b2744]',
-    secondary: 'text-[#0d3b66]',
+    badge: 'border-[color:var(--line-soft)] bg-[color:var(--panel-muted)] text-[color:var(--brand-700)]',
+    icon: 'bg-[color:var(--brand-700)]/12 text-[color:var(--brand-700)] ring-1 ring-[color:var(--line-soft)]',
+    panel: 'from-[color:var(--panel-muted)] via-[color:var(--panel-elevated)] to-[color:var(--brand-500)]/10',
+    button: 'border-[color:var(--brand-700)] bg-[color:var(--brand-700)] text-white hover:bg-[color:var(--brand-800)]',
+    secondary: 'text-[color:var(--brand-700)]',
   },
   indigo: {
     badge: 'border-indigo-200/80 bg-indigo-50 text-indigo-800',
@@ -44,36 +44,36 @@ export const CalculatorHero = ({
   const HeroIcon = Icon || Calculator;
 
   return (
-    <section className={`relative overflow-hidden rounded-[2rem] border border-white/70 bg-gradient-to-br ${styles.panel} px-5 py-6 shadow-[0_24px_80px_-36px_rgba(13,59,102,0.25)] backdrop-blur sm:px-8 sm:py-8`}>
-      <div className="absolute inset-0 opacity-60">
-        <div className="h-full w-full bg-[linear-gradient(rgba(13,59,102,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(13,59,102,0.04)_1px,transparent_1px)] bg-[size:24px_24px]" />
+    <section className={`relative overflow-hidden rounded-[2rem] border border-[color:var(--line-soft)] bg-gradient-to-br ${styles.panel} px-5 py-6 shadow-[0_24px_80px_-36px_rgba(13,59,102,0.28)] backdrop-blur sm:px-8 sm:py-8`}>
+      <div className="absolute inset-0 opacity-70">
+        <div className="h-full w-full bg-[linear-gradient(rgba(13,59,102,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(13,59,102,0.05)_1px,transparent_1px)] bg-[size:24px_24px]" />
       </div>
       <div className="absolute inset-y-0 right-0 hidden w-40 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.9),_transparent_68%)] lg:block" />
       <div className="relative flex flex-col gap-5">
         <div className="flex flex-wrap items-center gap-3">
           <Link
             to="/"
-            className="inline-flex items-center gap-2 rounded-full border border-[#0d3b66]/10 bg-white/80 px-3 py-1.5 text-sm font-semibold text-slate-700 transition hover:border-[#0d3b66]/20 hover:bg-white"
+            className="inline-flex items-center gap-2 rounded-full border border-[color:var(--line-soft)] bg-[color:var(--panel-elevated)] px-3 py-1.5 text-sm font-semibold text-[color:var(--text-body)] transition hover:border-[color:var(--brand-500)] hover:bg-[color:var(--panel-base)]"
           >
             <ChevronLeft className="h-4 w-4" />
             Trang chủ
           </Link>
           <span className={`inline-flex items-center rounded-full border px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.24em] ${styles.badge}`}>
-            Chu de HCMUT
+            Calculator 2026
           </span>
         </div>
 
         <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-3xl">
-            <div className="mb-4 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-white shadow-sm">
+            <div className="mb-4 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-[color:var(--panel-elevated)] shadow-sm">
               <div className={`inline-flex h-11 w-11 items-center justify-center rounded-2xl ${styles.icon}`}>
                 <HeroIcon className="h-6 w-6" />
               </div>
             </div>
-            <h1 className="text-3xl font-black tracking-tight text-slate-950 sm:text-4xl lg:text-[2.6rem]">
+            <h1 className="text-3xl font-black tracking-tight text-[color:var(--text-strong)] sm:text-4xl lg:text-[2.6rem]">
               {title}
             </h1>
-            <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-600 sm:text-base">
+            <p className="mt-3 max-w-2xl text-sm leading-7 text-[color:var(--text-muted)] sm:text-base">
               {description}
             </p>
           </div>

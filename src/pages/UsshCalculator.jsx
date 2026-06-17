@@ -41,7 +41,7 @@ export const UsshCalculator = () => {
   };
 
   return (
-    <div className="w-full animate-in fade-in duration-500 pb-28">
+    <div className="calculator-page w-full animate-in fade-in duration-500 pb-28">
       <div className="space-y-8">
       <CalculatorHero
         title="Máy tính điểm USSH 2026"

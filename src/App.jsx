@@ -8,6 +8,7 @@ import { UelCalculator } from './pages/UelCalculator';
 import { IuCalculator } from './pages/IuCalculator';
 import { UhsCalculator } from './pages/UhsCalculator';
 import { UitCalculator } from './pages/UitCalculator';
+import { ThemeProvider } from './components/layout/ThemeContext';
 
 const NotFound = () => (
   <div className="mx-auto flex min-h-[55vh] max-w-xl flex-col items-center justify-center py-16 text-center">
@@ -31,21 +32,23 @@ const NotFound = () => (
 
 function App() {
   return (
-    <HashRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="hcmus" element={<HcmusCalculator />} />
-          <Route path="hcmut" element={<HcmutCalculator />} />
-          <Route path="hcmussh" element={<UsshCalculator />} />
-          <Route path="uel" element={<UelCalculator />} />
-          <Route path="iu" element={<IuCalculator />} />
-          <Route path="uhs" element={<UhsCalculator />} />
-          <Route path="uit" element={<UitCalculator />} />
-          <Route path="*" element={<NotFound />} />
-        </Route>
-      </Routes>
-    </HashRouter>
+    <ThemeProvider>
+      <HashRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="hcmus" element={<HcmusCalculator />} />
+            <Route path="hcmut" element={<HcmutCalculator />} />
+            <Route path="hcmussh" element={<UsshCalculator />} />
+            <Route path="uel" element={<UelCalculator />} />
+            <Route path="iu" element={<IuCalculator />} />
+            <Route path="uhs" element={<UhsCalculator />} />
+            <Route path="uit" element={<UitCalculator />} />
+            <Route path="*" element={<NotFound />} />
+          </Route>
+        </Routes>
+      </HashRouter>
+    </ThemeProvider>
   );
 }
 

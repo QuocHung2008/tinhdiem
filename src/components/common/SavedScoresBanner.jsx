@@ -2,27 +2,27 @@ import { Database, RotateCcw } from 'lucide-react';
 
 const toneClass = {
   blue: {
-    panel: 'border-blue-200 bg-blue-50/80 text-blue-950',
+    panel: 'border-[color:var(--line-soft)] bg-[linear-gradient(135deg,var(--panel-muted),var(--panel-elevated))] text-[color:var(--text-strong)]',
     icon: 'bg-blue-600 text-white',
-    button: 'border-blue-200 bg-white text-blue-800 hover:bg-blue-100 focus-visible:ring-blue-500',
+    button: 'border-[color:var(--line-soft)] bg-[color:var(--panel-base)] text-blue-800 hover:bg-blue-100/70 focus-visible:ring-blue-500',
     badge: 'bg-blue-100 text-blue-800',
   },
   indigo: {
-    panel: 'border-indigo-200 bg-indigo-50/80 text-indigo-950',
+    panel: 'border-[color:var(--line-soft)] bg-[linear-gradient(135deg,var(--panel-muted),var(--panel-elevated))] text-[color:var(--text-strong)]',
     icon: 'bg-indigo-600 text-white',
-    button: 'border-indigo-200 bg-white text-indigo-800 hover:bg-indigo-100 focus-visible:ring-indigo-500',
+    button: 'border-[color:var(--line-soft)] bg-[color:var(--panel-base)] text-indigo-800 hover:bg-indigo-100/70 focus-visible:ring-indigo-500',
     badge: 'bg-indigo-100 text-indigo-800',
   },
   emerald: {
-    panel: 'border-emerald-200 bg-emerald-50/80 text-emerald-950',
+    panel: 'border-[color:var(--line-soft)] bg-[linear-gradient(135deg,var(--panel-muted),var(--panel-elevated))] text-[color:var(--text-strong)]',
     icon: 'bg-emerald-600 text-white',
-    button: 'border-emerald-200 bg-white text-emerald-800 hover:bg-emerald-100 focus-visible:ring-emerald-500',
+    button: 'border-[color:var(--line-soft)] bg-[color:var(--panel-base)] text-emerald-800 hover:bg-emerald-100/70 focus-visible:ring-emerald-500',
     badge: 'bg-emerald-100 text-emerald-800',
   },
   red: {
-    panel: 'border-red-200 bg-red-50/80 text-red-950',
+    panel: 'border-[color:var(--line-soft)] bg-[linear-gradient(135deg,var(--panel-muted),var(--panel-elevated))] text-[color:var(--text-strong)]',
     icon: 'bg-red-600 text-white',
-    button: 'border-red-200 bg-white text-red-800 hover:bg-red-100 focus-visible:ring-red-500',
+    button: 'border-[color:var(--line-soft)] bg-[color:var(--panel-base)] text-red-800 hover:bg-red-100/70 focus-visible:ring-red-500',
     badge: 'bg-red-100 text-red-800',
   },
 };
@@ -53,7 +53,7 @@ export const SavedScoresBanner = ({
                 {hasSavedData ? 'Đang hoạt động' : 'Sẵn sàng'}
               </span>
             </div>
-            <p className="text-sm leading-7 text-slate-700">
+            <p className="text-sm leading-7 text-[color:var(--text-body)]">
               Điểm đã nhập được lưu cục bộ bằng `localStorage` trên trình duyệt này.
               {hasSavedData
                 ? ' Khi mở lại trang, dữ liệu sẽ được phục hồi tự động.'

@@ -12,16 +12,16 @@ const ThreadsIcon = (props) => (
 
 export const Footer = () => {
   return (
-    <footer className="mt-auto border-t border-[#0d3b66]/10 bg-[#0b2744] text-white">
+    <footer className="mt-auto border-t border-[color:var(--line-soft)] bg-[color:var(--footer-bg)] text-white">
       <div className="app-container py-10">
-        <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-br from-[#0d3b66] via-[#123f6c] to-[#0b2744] px-6 py-6 shadow-[0_24px_80px_-36px_rgba(2,12,27,0.8)] sm:px-8">
+        <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(135deg,var(--panel-strong),var(--panel-strong-2))] px-6 py-6 shadow-[0_24px_80px_-36px_rgba(2,12,27,0.8)] sm:px-8">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             <div className="max-w-2xl">
               <p className="text-xs font-semibold uppercase tracking-[0.24em] text-amber-200">
-                HCMUT Inspired Theme
+                VNUHCM Calculator
               </p>
               <p className="mt-2 text-lg font-black text-white">
-                Web Tính Điểm ĐHQG-HCM với giao diện cảm hứng Bách khoa
+                Giao diện mới gọn hơn, hỗ trợ dark mode và truy cập nhanh tới từng trường
               </p>
               <p className="mt-2 text-sm leading-7 text-slate-200">
                 Công cụ tham khảo giúp so sánh nhanh nhiều phương thức tuyển sinh.

@@ -9,45 +9,89 @@
 
   :root {
     color-scheme: light;
+    --brand-500: #2f72c9;
+    --brand-700: #0d3b66;
+    --brand-800: #0b2744;
+    --surface-bg:
+      radial-gradient(circle at top, rgba(13, 59, 102, 0.16), transparent 32%),
+      radial-gradient(circle at right top, rgba(247, 181, 0, 0.12), transparent 20%),
+      linear-gradient(180deg, #f6f8fc 0%, #eaf0f8 45%, #f8fafc 100%);
+    --body-text: #0f172a;
+    --text-strong: #020617;
+    --text-body: #1e293b;
+    --text-muted: #475569;
+    --text-faint: #64748b;
+    --panel-base: rgba(248, 250, 252, 0.88);
+    --panel-elevated: rgba(255, 255, 255, 0.9);
+    --panel-muted: rgba(13, 59, 102, 0.06);
+    --panel-strong: #0d3b66;
+    --panel-strong-2: #0b2744;
+    --line-soft: rgba(13, 59, 102, 0.12);
+    --nav-bg: rgba(11, 39, 68, 0.94);
+    --nav-foreground: #ffffff;
+    --footer-bg: #081d32;
   }
 
-  body {
-    @apply bg-slate-950 text-slate-900;
+  html[data-theme='dark'] {
+    color-scheme: dark;
+    --brand-500: #4a8ef0;
+    --brand-700: #72a7ff;
+    --brand-800: #9bbfff;
+    --surface-bg:
+      radial-gradient(circle at top, rgba(74, 142, 240, 0.22), transparent 34%),
+      radial-gradient(circle at right top, rgba(247, 181, 0, 0.14), transparent 22%),
+      linear-gradient(180deg, #06111f 0%, #091829 42%, #07111d 100%);
+    --body-text: #d7e3f4;
+    --text-strong: #f8fbff;
+    --text-body: #d7e3f4;
+    --text-muted: #b4c3d8;
+    --text-faint: #87a0bf;
+    --panel-base: rgba(8, 18, 32, 0.9);
+    --panel-elevated: rgba(12, 24, 42, 0.88);
+    --panel-muted: rgba(114, 167, 255, 0.1);
+    --panel-strong: #0d2442;
+    --panel-strong-2: #050d18;
+    --line-soft: rgba(132, 170, 230, 0.18);
+    --nav-bg: rgba(5, 13, 24, 0.9);
+    --nav-foreground: #f8fbff;
+    --footer-bg: #030915;
   }
 
   body {
     min-height: 100vh;
-    background:
-      radial-gradient(circle at top, rgba(13, 59, 102, 0.18), transparent 30%),
-      radial-gradient(circle at right top, rgba(247, 181, 0, 0.12), transparent 20%),
-      linear-gradient(180deg, #f6f8fc 0%, #eaf0f8 45%, #f8fafc 100%);
+    background: var(--surface-bg);
+    color: var(--body-text);
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   * {
-    @apply border-slate-200;
+    border-color: var(--line-soft);
   }
 
   input,
   select,
   textarea {
-    @apply transition-colors;
+    transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease, box-shadow 150ms ease;
+    color: inherit;
   }
 
   *:focus-visible {
-    @apply outline-none ring-2 ring-amber-400 ring-offset-2 ring-offset-white;
+    outline: none;
+    box-shadow: 0 0 0 2px #fbbf24, 0 0 0 4px rgba(255, 255, 255, 0.14);
   }
 
   ::selection {
-    @apply bg-amber-100 text-slate-950;
+    background: rgba(251, 191, 36, 0.28);
+    color: var(--text-strong);
   }
 }
 
 @layer components {
   .app-shell {
-    @apply min-h-screen text-slate-900;
+    @apply min-h-screen;
+    color: var(--body-text);
   }
 
   .app-container {
@@ -55,11 +99,14 @@
   }
 
   .surface-card {
-    @apply rounded-[2rem] border border-white/80 bg-white/90 shadow-[0_24px_80px_-36px_rgba(13,59,102,0.22)] backdrop-blur;
+    @apply rounded-[2rem] border shadow-[0_24px_80px_-36px_rgba(13,59,102,0.22)] backdrop-blur;
+    border-color: var(--line-soft);
+    background: var(--panel-elevated);
   }
 
   .section-title {
-    @apply text-sm font-semibold uppercase tracking-[0.24em] text-[#0d3b66];
+    @apply text-sm font-semibold uppercase tracking-[0.24em];
+    color: var(--brand-700);
   }
 
   .hcmut-grid {
@@ -69,6 +116,119 @@
     background-position: center;
     background-size: 28px 28px;
   }
+}
+
+html[data-theme='dark'] .hcmut-grid {
+  background-image:
+    linear-gradient(rgba(114, 167, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(114, 167, 255, 0.08) 1px, transparent 1px);
+}
+
+html[data-theme='dark'] .calculator-page input:not([type='checkbox']):not([type='radio']):not([type='range']),
+html[data-theme='dark'] .calculator-page select,
+html[data-theme='dark'] .calculator-page textarea {
+  background-color: rgba(9, 20, 34, 0.92) !important;
+  border-color: var(--line-soft) !important;
+  color: var(--text-strong) !important;
+}
+
+html[data-theme='dark'] .calculator-page input::placeholder,
+html[data-theme='dark'] .calculator-page textarea::placeholder {
+  color: var(--text-faint) !important;
+}
+
+html[data-theme='dark'] .calculator-page option {
+  background: #081220;
+  color: var(--text-strong);
+}
+
+html[data-theme='dark'] .calculator-page [class*='text-slate-950'],
+html[data-theme='dark'] .calculator-page [class*='text-slate-900'],
+html[data-theme='dark'] .calculator-page [class*='text-slate-800'] {
+  color: var(--text-strong) !important;
+}
+
+html[data-theme='dark'] .calculator-page [class*='text-slate-700'],
+html[data-theme='dark'] .calculator-page [class*='text-slate-600'],
+html[data-theme='dark'] .calculator-page [class*='text-slate-500'],
+html[data-theme='dark'] .calculator-page [class*='text-slate-400'] {
+  color: var(--text-muted) !important;
+}
+
+html[data-theme='dark'] .calculator-page [class*='bg-white'],
+html[data-theme='dark'] .calculator-page [class*='bg-slate-50'],
+html[data-theme='dark'] .calculator-page [class*='bg-slate-100'] {
+  background-color: rgba(9, 20, 34, 0.86) !important;
+}
+
+html[data-theme='dark'] .calculator-page [class*='bg-blue-50'] {
+  background-color: rgba(22, 55, 95, 0.54) !important;
+}
+
+html[data-theme='dark'] .calculator-page [class*='bg-emerald-50'] {
+  background-color: rgba(12, 72, 60, 0.45) !important;
+}
+
+html[data-theme='dark'] .calculator-page [class*='bg-amber-50'] {
+  background-color: rgba(104, 71, 12, 0.44) !important;
+}
+
+html[data-theme='dark'] .calculator-page [class*='bg-red-50'],
+html[data-theme='dark'] .calculator-page [class*='bg-rose-50'] {
+  background-color: rgba(104, 24, 35, 0.44) !important;
+}
+
+html[data-theme='dark'] .calculator-page [class*='border-slate-100'],
+html[data-theme='dark'] .calculator-page [class*='border-slate-200'],
+html[data-theme='dark'] .calculator-page [class*='border-slate-300'],
+html[data-theme='dark'] .calculator-page [class*='border-blue-100'],
+html[data-theme='dark'] .calculator-page [class*='border-blue-200'],
+html[data-theme='dark'] .calculator-page [class*='border-emerald-100'],
+html[data-theme='dark'] .calculator-page [class*='border-emerald-200'],
+html[data-theme='dark'] .calculator-page [class*='border-amber-100'],
+html[data-theme='dark'] .calculator-page [class*='border-red-200'],
+html[data-theme='dark'] .calculator-page [class*='border-rose-200'] {
+  border-color: var(--line-soft) !important;
+}
+
+html[data-theme='dark'] .calculator-page [class*='divide-slate-100'] > :not([hidden]) ~ :not([hidden]),
+html[data-theme='dark'] .calculator-page [class*='divide-slate-200'] > :not([hidden]) ~ :not([hidden]) {
+  border-color: var(--line-soft) !important;
+}
+
+html[data-theme='dark'] .calculator-page [class*='text-blue-900'],
+html[data-theme='dark'] .calculator-page [class*='text-blue-800'],
+html[data-theme='dark'] .calculator-page [class*='text-blue-700'] {
+  color: #9fc3ff !important;
+}
+
+html[data-theme='dark'] .calculator-page [class*='text-emerald-900'],
+html[data-theme='dark'] .calculator-page [class*='text-emerald-800'],
+html[data-theme='dark'] .calculator-page [class*='text-emerald-700'],
+html[data-theme='dark'] .calculator-page [class*='text-emerald-600'] {
+  color: #8ce8c4 !important;
+}
+
+html[data-theme='dark'] .calculator-page [class*='text-amber-900'],
+html[data-theme='dark'] .calculator-page [class*='text-amber-800'],
+html[data-theme='dark'] .calculator-page [class*='text-amber-700'],
+html[data-theme='dark'] .calculator-page [class*='text-amber-600'] {
+  color: #ffd789 !important;
+}
+
+html[data-theme='dark'] .calculator-page [class*='text-red-800'],
+html[data-theme='dark'] .calculator-page [class*='text-red-700'],
+html[data-theme='dark'] .calculator-page [class*='text-red-500'],
+html[data-theme='dark'] .calculator-page [class*='text-rose-700'] {
+  color: #ffacb8 !important;
+}
+
+html[data-theme='dark'] .calculator-page table thead {
+  background-color: rgba(9, 20, 34, 0.96) !important;
+}
+
+html[data-theme='dark'] .calculator-page table tbody tr:hover {
+  background-color: rgba(18, 38, 64, 0.45);
 }
 
 @media (prefers-reduced-motion: reduce) {

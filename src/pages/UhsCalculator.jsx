@@ -138,7 +138,7 @@ export const UhsCalculator = () => {
   );
 
   return (
-    <div className="w-full animate-in fade-in pb-28 duration-500">
+    <div className="calculator-page w-full animate-in fade-in pb-28 duration-500">
       <div className="space-y-8">
       <CalculatorHero
         title="Máy tính điểm UHS 2026"

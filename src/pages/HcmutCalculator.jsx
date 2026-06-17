@@ -69,7 +69,7 @@ export const HcmutCalculator = () => {
   const hasDgnlQuickTotal = state.dgnlQuickTotal !== '';
 
   return (
-    <div className="w-full animate-in fade-in duration-500 pb-28">
+    <div className="calculator-page w-full animate-in fade-in duration-500 pb-28">
       <div className="space-y-8">
       <CalculatorHero
         title="Máy tính điểm HCMUT 2026"
