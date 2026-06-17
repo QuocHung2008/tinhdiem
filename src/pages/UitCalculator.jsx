@@ -492,32 +492,7 @@ export const UitCalculator = () => {
                 </div>
               </div>
             </CardSection>
-                <div>
-                  <label className="mb-2 block text-sm font-medium text-slate-700">Khu vực</label>
-                  <select
-                    value={state.kv}
-                    onChange={(event) => state.setKv(event.target.value)}
-                    className="w-full rounded-md border border-slate-200 bg-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  >
-                    {KHU_VUC.map((item) => (
-                      <option key={item.id} value={item.id}>{item.name}</option>
-                    ))}
-                  </select>
-                </div>
-                <div>
-                  <label className="mb-2 block text-sm font-medium text-slate-700">Đối tượng</label>
-                  <select
-                    value={state.dt}
-                    onChange={(event) => state.setDt(event.target.value)}
-                    className="w-full rounded-md border border-slate-200 bg-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  >
-                    {DOI_TUONG.map((item) => (
-                      <option key={item.id} value={item.id}>{item.name}</option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-            </CardSection>
+
 
           </div>
 
@@ -529,7 +504,7 @@ export const UitCalculator = () => {
           value={`${results.total.toFixed(2)} / 100`}
           onOpen={() => setShowMobileResultModal(true)}
         />
-      </div>
+      </div >
     </div>
   );
 };
