@@ -1,5 +1,5 @@
-import { useRef } from 'react';
-import { Database, RotateCcw, Download, Upload } from 'lucide-react';
+import { useRef, useState, useEffect } from 'react';
+import { Database, RotateCcw, Download, Upload, CheckCircle2, AlertTriangle, X } from 'lucide-react';
 
 const toneClass = {
   blue: {
@@ -37,6 +37,14 @@ export const SavedScoresBanner = ({
 }) => {
   const styles = toneClass[tone] || toneClass.blue;
   const fileInputRef = useRef(null);
+  const [importStatus, setImportStatus] = useState(null);
+
+  useEffect(() => {
+    if (importStatus?.type === 'success') {
+      const timer = setTimeout(() => setImportStatus(null), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [importStatus]);
 
   const handleImportClick = () => {
     fileInputRef.current?.click();
@@ -45,13 +53,14 @@ export const SavedScoresBanner = ({
   const handleFileChange = async (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
+    setImportStatus(null);
     try {
       if (onImport) {
         await onImport(file);
-        alert('Nhập dữ liệu thành công!');
+        setImportStatus({ type: 'success', message: 'Nhập dữ liệu thành công!' });
       }
     } catch (error) {
-      alert(error.message);
+      setImportStatus({ type: 'error', message: error.message });
     }
     // Reset input
     e.target.value = '';
@@ -131,6 +140,18 @@ export const SavedScoresBanner = ({
           </button>
         </div>
       </div>
+
+      {importStatus && (
+        <div className={`mt-4 flex items-start gap-3 rounded-xl p-3 text-sm font-medium border border-[color:var(--line-soft)] bg-[color:var(--panel-base)] ${importStatus.type === 'error' ? 'text-rose-500' : 'text-emerald-500'}`}>
+          {importStatus.type === 'error' ? <AlertTriangle className="h-5 w-5 shrink-0" /> : <CheckCircle2 className="h-5 w-5 shrink-0" />}
+          <div className="flex-1 pt-0.5 text-[color:var(--text-body)]">{importStatus.message}</div>
+          {importStatus.type === 'error' && (
+             <button type="button" onClick={() => setImportStatus(null)} className="p-0.5 hover:bg-[color:var(--panel-muted)] rounded-lg transition-colors text-[color:var(--text-muted)]">
+               <X className="h-4 w-4" />
+             </button>
+          )}
+        </div>
+      )}
     </section>
   );
 };

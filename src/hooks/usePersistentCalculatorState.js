@@ -113,16 +113,29 @@ export const usePersistentCalculatorState = (storageKey, initialValues) => {
   }, []);
 
   const exportData = useCallback(() => {
-    const data = {
-      calculatorKey: storageKey,
+    const allData = {};
+    for (let i = 0; i < window.localStorage.length; i++) {
+      const key = window.localStorage.key(i);
+      if (key && key.startsWith('vnuhcm-calculator:')) {
+        try {
+          allData[key] = JSON.parse(window.localStorage.getItem(key));
+        } catch {
+          // ignore invalid json in localstorage
+        }
+      }
+    }
+    allData[storageKey] = values;
+
+    const dataPayload = {
+      type: 'vnuhcm-calculator-export-all',
       timestamp: Date.now(),
-      values,
+      data: allData,
     };
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const blob = new Blob([JSON.stringify(dataPayload, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `${storageKey.replace('vnuhcm-calculator:', '')}-data.json`;
+    a.download = `vnuhcm-calculator-all-data.json`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -134,16 +147,31 @@ export const usePersistentCalculatorState = (storageKey, initialValues) => {
       const reader = new FileReader();
       reader.onload = (e) => {
         try {
-          const data = JSON.parse(e.target.result);
-          if (data.calculatorKey !== storageKey) {
-            const currentTab = storageKey.replace('vnuhcm-calculator:', '').toUpperCase();
-            const fileTab = data.calculatorKey ? data.calculatorKey.replace('vnuhcm-calculator:', '').toUpperCase() : 'Khác';
-            reject(new Error(`Tệp dữ liệu này thuộc về tab ${fileTab}, không phù hợp với tab hiện tại (${currentTab}). Vui lòng chuyển sang tab ${fileTab} để nhập điểm.`));
-            return;
+          const payload = JSON.parse(e.target.result);
+          if (payload.type === 'vnuhcm-calculator-export-all' && payload.data) {
+            for (const [key, storedValues] of Object.entries(payload.data)) {
+              if (key === storageKey) {
+                const sanitizedState = sanitizeStoredValues(initialValues, storedValues);
+                setValues(sanitizedState.values);
+              } else {
+                window.localStorage.setItem(key, JSON.stringify(storedValues));
+              }
+            }
+            resolve();
+          } else if (payload.calculatorKey) {
+            // Legacy single-tab format
+            if (payload.calculatorKey !== storageKey) {
+              const currentTab = storageKey.replace('vnuhcm-calculator:', '').toUpperCase();
+              const fileTab = payload.calculatorKey ? payload.calculatorKey.replace('vnuhcm-calculator:', '').toUpperCase() : 'Khác';
+              reject(new Error(`Tệp dữ liệu này thuộc về tab ${fileTab}, không phù hợp với tab hiện tại (${currentTab}). Vui lòng chuyển sang tab ${fileTab} để nhập điểm.`));
+              return;
+            }
+            const sanitizedState = sanitizeStoredValues(initialValues, payload.values);
+            setValues(sanitizedState.values);
+            resolve();
+          } else {
+            reject(new Error('Định dạng tệp không hợp lệ.'));
           }
-          const sanitizedState = sanitizeStoredValues(initialValues, data.values);
-          setValues(sanitizedState.values);
-          resolve();
         } catch (error) {
           console.error('[Import Error]', error);
           reject(new Error('Tệp dữ liệu không hợp lệ hoặc bị lỗi.'));
