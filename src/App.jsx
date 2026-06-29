@@ -8,6 +8,7 @@ import { UelCalculator } from './pages/UelCalculator';
 import { IuCalculator } from './pages/IuCalculator';
 import { UhsCalculator } from './pages/UhsCalculator';
 import { UitCalculator } from './pages/UitCalculator';
+import { AspirationsAnalyzer } from './pages/AspirationsAnalyzer';
 import { ThemeProvider } from './components/layout/ThemeContext';
 
 const NotFound = () => (
@@ -37,6 +38,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
+            <Route path="aspirations" element={<AspirationsAnalyzer />} />
             <Route path="hcmus" element={<HcmusCalculator />} />
             <Route path="hcmut" element={<HcmutCalculator />} />
             <Route path="hcmussh" element={<UsshCalculator />} />

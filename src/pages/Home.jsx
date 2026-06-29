@@ -64,16 +64,20 @@ export const Home = () => {
             </div>
 
             <div className="flex flex-wrap gap-3">
+              <Link
+                to="/aspirations"
+                className="inline-flex items-center gap-2 rounded-[1rem] bg-gradient-to-r from-blue-600 to-indigo-600 px-5 py-3 text-sm font-semibold text-white shadow-[0_16px_30px_-18px_rgba(13,59,102,0.7)] transition hover:-translate-y-0.5 hover:shadow-lg"
+              >
+                <Sparkles className="h-4 w-4 text-amber-200" />
+                Phân tích nguyện vọng AI (Mới)
+              </Link>
               <a
                 href="#school-directory"
-                className="inline-flex items-center gap-2 rounded-[1rem] bg-[color:var(--brand-700)] px-5 py-3 text-sm font-semibold text-white shadow-[0_16px_30px_-18px_rgba(13,59,102,0.7)] transition hover:-translate-y-0.5 hover:bg-[color:var(--brand-800)]"
+                className="inline-flex items-center gap-2 rounded-[1rem] bg-[color:var(--panel-elevated)] border border-[color:var(--line-soft)] px-5 py-3 text-sm font-semibold text-[color:var(--text-strong)] transition hover:-translate-y-0.5 hover:bg-[color:var(--panel-muted)]"
               >
-                Chọn trường để tính điểm
+                Chọn trường tự tính
                 <ArrowRight className="h-4 w-4" />
               </a>
-              <span className="inline-flex items-center rounded-[1rem] border border-[color:var(--line-soft)] bg-[color:var(--panel-elevated)] px-4 py-3 text-sm font-medium text-[color:var(--text-muted)]">
-                {SCHOOLS.length} công cụ đang hoạt động
-              </span>
             </div>
           </div>
 
