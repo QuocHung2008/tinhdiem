@@ -33,8 +33,6 @@ jobs:
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
-        with:
-          enablement: true        # auto-enables Pages if not already enabled
 
       - name: Build project
         run: npm run build
